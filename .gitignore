@@ -4,6 +4,9 @@ node_modules/
 # Build output
 dist/
 
+# Vercel
+.vercel/
+
 # Environment — never commit secrets
 .env
 
