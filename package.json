@@ -1,7 +1,7 @@
 {
   "name": "bulkmailer-tracking-backend",
   "version": "1.0.0",
-  "description": "Email tracking backend for BulkMailer-Swift",
+  "description": "Email tracking backend for BulkMailer",
   "main": "dist/index.js",
   "scripts": {
     "dev": "tsx watch src/index.ts",

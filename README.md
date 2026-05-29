@@ -1,6 +1,6 @@
 # BulkMailer Tracking Backend
 
-Email open-tracking server for [BulkMailer-Swift](https://github.com/SolankiYogesh/BulkMailer-Swift).
+Email open-tracking server for [BulkMailer](https://github.com/SolankiYogesh/BulkMailer).
 
 Built with **Hono** · **Drizzle ORM** · **Neon PostgreSQL** · **TypeScript**
 
@@ -349,7 +349,7 @@ For reliable tracking pixels, use Railway or Fly.io (no cold starts on free tier
 
 ## Related
 
-- [BulkMailer-Swift](https://github.com/SolankiYogesh/BulkMailer-Swift) — the macOS app that uses this backend
+- [BulkMailer](https://github.com/SolankiYogesh/BulkMailer) — the macOS app that uses this backend
 
 ---
 
