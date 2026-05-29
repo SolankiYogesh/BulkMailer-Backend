@@ -1,0 +1,25 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# Environment — never commit secrets
+.env
+
+# Drizzle generated migrations (optional — commit if you want migration history)
+drizzle/
+
+# macOS
+.DS_Store
+*.DS_Store
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log
+npm-debug.log*
