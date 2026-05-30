@@ -2,7 +2,6 @@ import { Hono } from "hono";
 import { cors } from "hono/cors";
 import { logger } from "hono/logger";
 
-import campaignsRouter from "./routes/campaigns";
 import emailsRouter from "./routes/emails";
 import trackRouter from "./routes/track";
 import dbRouter from "./routes/db";
@@ -28,7 +27,6 @@ app.get("/api/config", (c) => {
   });
 });
 
-app.route("/api/campaigns", campaignsRouter);
 app.route("/api/emails", emailsRouter);
 app.route("/track", trackRouter);
 app.route("/api/db", dbRouter);

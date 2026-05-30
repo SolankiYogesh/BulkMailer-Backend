@@ -17,23 +17,12 @@ router.post("/connect", async (c) => {
   try {
     const sql = neon(body.databaseUrl);
 
-    // Create tables if they don't exist — idempotent, safe to re-run
-    await sql`
-      CREATE TABLE IF NOT EXISTS campaigns (
-        id          UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-        subject     TEXT NOT NULL,
-        body        TEXT NOT NULL,
-        sender      TEXT NOT NULL,
-        created_at  TIMESTAMPTZ NOT NULL DEFAULT now(),
-        total_count INT NOT NULL DEFAULT 0
-      )
-    `;
-
+    // Create table if it doesn't exist — idempotent, safe to re-run
     await sql`
       CREATE TABLE IF NOT EXISTS tracked_emails (
         id           UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-        campaign_id  UUID NOT NULL REFERENCES campaigns(id) ON DELETE CASCADE,
         recipient    TEXT NOT NULL,
+        subject      TEXT,
         status       TEXT NOT NULL DEFAULT 'sent',
         sent_at      TIMESTAMPTZ NOT NULL DEFAULT now(),
         read_at      TIMESTAMPTZ,
@@ -41,11 +30,6 @@ router.post("/connect", async (c) => {
         user_agent   TEXT,
         ip_address   TEXT
       )
-    `;
-
-    await sql`
-      CREATE INDEX IF NOT EXISTS idx_tracked_emails_campaign
-        ON tracked_emails(campaign_id)
     `;
 
     await sql`
@@ -57,8 +41,7 @@ router.post("/connect", async (c) => {
     const tables = await sql`
       SELECT table_name FROM information_schema.tables
       WHERE table_schema = 'public'
-        AND table_name IN ('campaigns', 'tracked_emails')
-      ORDER BY table_name
+        AND table_name = 'tracked_emails'
     `;
 
     return c.json({
